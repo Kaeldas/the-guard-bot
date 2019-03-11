@@ -18,7 +18,7 @@ const addCommandHandler = async (ctx) => {
 
 	if (ctx.from.status !== 'admin') {
 		return reply(
-			'ℹ️ <b>Sorry, only admins access this command.</b>',
+			'ℹ️ <b>Desculpe, só ceifadores podem acessar esse comando</b>',
 			replyOptions
 		);
 	}
@@ -27,15 +27,15 @@ const addCommandHandler = async (ctx) => {
 	const isValidName = /^!?(\w+)$/.exec(commandName);
 	if (!isValidName) {
 		return reply(
-			'<b>Send a valid command.</b>\n\nExample:\n' +
-			'<code>/addcommand rules</code>',
+			'<b>Envie um comando válido.</b>\n\nExemplo:\n' +
+			'<code>/addcommand funk_comunista</code>',
 			replyOptions
 		);
 	}
 	const newCommand = isValidName[1].toLowerCase();
 	if (preserved.has(newCommand)) {
-		return reply('❗️ Sorry you can\'t use this name, it\'s preserved.\n\n' +
-			'Try another one.');
+		return reply('❗️ Desculpe você não pode usar esse nome, ele é reservado.\n\n' +
+			'Tente outro.');
 	}
 
 	const replaceCmd = slashCommand.toLowerCase() === '/replacecommand';
@@ -44,11 +44,11 @@ const addCommandHandler = async (ctx) => {
 
 	if (!replaceCmd && cmdExists) {
 		return ctx.replyWithHTML(
-			'ℹ️ <b>This command already exists.</b>\n\n' +
-			'/commands - to see the list of commands.\n' +
-			'/addcommand <code>&lt;name&gt;</code> - to add a command.\n' +
+			'ℹ️ <b>Esse comando já existe.</b>\n\n' +
+			'/commands - para ver a lista de comandos comunistas.\n' +
+			'/addcommand <code>&lt;name&gt;</code> - para adicionar um comando.\n' +
 			'/removecommand <code>&lt;name&gt;</code>' +
-			' - to remove a command.',
+			' - para remover um comando.',
 			Markup.keyboard([ [ `/replaceCommand ${newCommand}` ] ])
 				.oneTime()
 				.resize()
@@ -57,13 +57,13 @@ const addCommandHandler = async (ctx) => {
 	}
 	if (cmdExists && cmdExists.role === 'master' && !isMaster(ctx.from)) {
 		return ctx.reply(
-			'ℹ️ <b>Sorry, only master can replace this command.</b>',
+			'ℹ️ <b>Desculpe, só o Ceifador-mor pode acessar esse comando.</b>',
 			replyOptions
 		);
 	}
 	await addCommand({ id, name: newCommand, state: 'role' });
-	return reply('Who can use this command?', Markup.keyboard([
-		[ 'Master', 'Admins', 'Everyone' ]
+	return reply('Quem pode usar esse comando?', Markup.keyboard([
+		[ 'Ceifador-mor', 'Ceifadores', 'Camaradas' ]
 	])
 		.oneTime()
 		.resize()
