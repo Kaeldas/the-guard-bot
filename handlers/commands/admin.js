@@ -22,7 +22,7 @@ const adminHandler = async ({ from, message, reply }) => {
 
 	if (targets.length > 1) {
 		return reply(
-			'ℹ️ <b>Specify one user to promote.</b>',
+			'ℹ️ <b>Especifique o camarada a ser promovido.</b>',
 			replyOptions
 		).then(scheduleDeletion());
 	}
@@ -33,19 +33,19 @@ const adminHandler = async ({ from, message, reply }) => {
 
 	if (!userToAdmin) {
 		return reply(
-			'❓ <b>User unknown.</b>\n' +
-			'Please forward their message, then try again.',
+			'❓ <b>Camarada desconhecido.</b>\n' +
+			'Por favor encaminhe uma mensagem e tente novamente.',
 			replyOptions
 		).then(scheduleDeletion());
 	}
 
 	if (userToAdmin.status === 'banned') {
-		return reply('ℹ️ <b>Can\'t admin banned user.</b>', replyOptions);
+		return reply('ℹ️ <b>Não posso promover usuários banidos.</b>', replyOptions);
 	}
 
 	if (userToAdmin.status === 'admin') {
 		return reply(
-			`⭐️ ${link(userToAdmin)} <b>is already admin.</b>`,
+			`⭐️ ${link(userToAdmin)} <b>já é um ceifador.</b>`,
 			replyOptions
 		);
 	}
@@ -56,7 +56,7 @@ const adminHandler = async ({ from, message, reply }) => {
 		logError(err);
 	}
 
-	return reply(`⭐️ ${link(userToAdmin)} <b>is now admin.</b>`, replyOptions);
+	return reply(`⭐️ ${link(userToAdmin)} <b>agora é um ceifador.</b>`, replyOptions);
 };
 
 module.exports = adminHandler;
