@@ -25,20 +25,20 @@ module.exports = async ({ admin, reason, userToWarn }) => {
 		.repeat(recentWarns.length === numberOfWarnsToBan - 1);
 
 	const warnMessage = dedent(`
-		⚠️ ${link(admin)} <b>warned</b> ${link(userToWarn)} <b>for</b>:
+		⚠️ ${link(admin)} <b>advertiu</b> ${link(userToWarn)} <b>por</b>:
 
 		${reason} (${recentWarns.length}/${numberOfWarnsToBan}${isLastWarn})`);
 
 	if (recentWarns.length >= numberOfWarnsToBan) {
 		await ban({
 			admin: context.botInfo,
-			reason: 'Reached max number of warnings',
+			reason: 'Atingiu o número máximo de advertências',
 			userToBan: userToWarn,
 		});
 		return warnMessage +
 			'\n\n' +
-			'🚫 The user was <b>banned</b> ' +
-			`for receiving ${numberOfWarnsToBan} warnings!`;
+			'🚫 O usuário foi <b>ceifado</b> ' +
+			`por receber ${numberOfWarnsToBan} advertência(s)!`;
 	}
 
 	return warnMessage;
