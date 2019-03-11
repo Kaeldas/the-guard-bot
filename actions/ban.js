@@ -22,7 +22,7 @@ module.exports = async ({ admin, reason, userToBan }) => {
 		telegram.kickChatMember(group.id, userToBan.id));
 
 	return dedent(`
-		🚫 ${link(admin)} <b>banned</b> ${displayUser(userToBan)} <b>for:</b>
+		🚫 ${link(admin)} <b>ceifou</b> ${displayUser(userToBan)} <b>por:</b>
 
 		${reason}`);
 };
